@@ -123,6 +123,8 @@ const AppCalendar = () => {
 
     const rs = await getChangeDateData(startTime, endTime)
 
+    console.log(rs)
+
     if (rs.length >= 0) {
       const convertedEvents = await convertCalendarEvents(rs);
 
