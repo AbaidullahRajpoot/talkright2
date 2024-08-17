@@ -261,6 +261,8 @@ const AppCalendar = () => {
         endTime
       };
 
+      console.log(requestBody)
+
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/apps/calender`, {
         method: 'POST',
         headers: {
