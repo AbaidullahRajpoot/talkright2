@@ -262,8 +262,10 @@ const AppCalendar = () => {
       };
 
       console.log(requestBody)
+      console.log(process.env.NEXT_PUBLIC_API_URL)
+      console.log(`${process.env.NEXT_PUBLIC_API_URL}/apps/calender`)
 
-      const res = await fetch(`https://talkright.vercel.app/apps/calender`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/apps/calender`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
