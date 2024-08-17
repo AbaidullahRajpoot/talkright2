@@ -1,16 +1,16 @@
-export function transformEvent(googleEvent) {
-    const startDate = new Date(googleEvent.start.dateTime);
-    const endDate = new Date(googleEvent.end.dateTime);
-  
-    return {
-      id: googleEvent.id,
-      url: googleEvent.htmlLink || '',
-      title: googleEvent.summary || '',
-      start: startDate,
-      end: endDate,
-      allDay: !googleEvent.start.dateTime,
-      extendedProps: {
-        calendar: googleEvent.organizer.email
-      }
-    };
-  }
+export function convertCalendarEvents(events) {
+
+  return events.map(event => ({
+
+    id: event.id,
+    url: event.htmlLink,
+    title: event.organizer.displayName,
+    start: new Date(event.start.dateTime),
+    end: new Date(event.end.dateTime),
+    allDay: false,
+    extendedProps: {
+      calendar: event.organizer.displayName
+    }
+
+  }));
+}

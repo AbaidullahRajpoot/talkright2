@@ -25,7 +25,7 @@ const SidebarLeft = props => {
     calendarApi,
     dispatch,
     handleLeftSidebarToggle,
-    handleAddEventSidebarToggle
+    handleChangeDate
   } = props
 
   // Vars
@@ -33,27 +33,22 @@ const SidebarLeft = props => {
 
   const renderFilters = colorsArr.length
     ? colorsArr.map(([key, value]) => {
-        return (
-          <FormControlLabel
-            className='mbe-1'
-            key={key}
-            label={key}
-            control={
-              <Checkbox
-                color={value}
-                checked={calendarStore.selectedCalendars.indexOf(key) > -1}
-                onChange={() => dispatch(filterCalendarLabel(key))}
-              />
-            }
-          />
-        )
-      })
+      return (
+        <FormControlLabel
+          className='mbe-1'
+          key={key}
+          label={key}
+          control={
+            <Checkbox
+              color={value}
+              checked={calendarStore.selectedCalendars.indexOf(key) > -1}
+              onChange={() => dispatch(filterCalendarLabel(key))}
+            />
+          }
+        />
+      )
+    })
     : null
-
-  const handleSidebarToggleSidebar = () => {
-    dispatch(selectedEvent(null))
-    handleAddEventSidebarToggle()
-  }
 
   if (renderFilters) {
     return (
@@ -85,33 +80,22 @@ const SidebarLeft = props => {
           }
         }}
       >
-        <div className='is-full p-6'>
-          <Button
-            fullWidth
-            variant='contained'
-            onClick={handleSidebarToggleSidebar}
-            startIcon={<i className='tabler-plus' />}
-          >
-            Add Appointments
-          </Button>
-        </div>
-
         <Divider className='is-full' />
 
         <AppReactDatepicker
           inline
-          onChange={date => calendarApi.gotoDate(date)}
+          onChange={(data) => { handleChangeDate(data) }}
           boxProps={{
             className: 'flex justify-center is-full',
             sx: { '& .react-datepicker': { boxShadow: 'none !important', border: 'none !important' } }
           }}
         />
-        
+
         <Divider className='is-full' />
 
         <div className='flex flex-col p-6 is-full'>
           <Typography variant='h5' className='mbe-4'>
-            Appointments Filters
+            Event Filters
           </Typography>
           <FormControlLabel
             className='mbe-1'
@@ -120,7 +104,16 @@ const SidebarLeft = props => {
               <Checkbox
                 color='secondary'
                 checked={calendarStore.selectedCalendars.length === colorsArr.length}
-                onChange={e => dispatch(filterAllCalendarLabels(e.target.checked))}
+                onChange={e => {
+                  if (calendarStore.selectedCalendars.length > 1) {
+                    dispatch(filterAllCalendarLabels(true))
+                  }
+                  else {
+                    dispatch(filterAllCalendarLabels(false))
+                  }
+                }
+
+                }
               />
             }
           />

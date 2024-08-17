@@ -131,3 +131,35 @@ code {
   background-color: rgb(var(--mui-palette-info-mainChannel) / 0.08);
   border: 0;
 }
+.MuiPaper-root .is-full{
+  max-height: calc(100% - 200px);
+  overflow: auto;
+}
+body *{
+  scrollbar-width: thin;
+  scrollbar-color: var(--mui-palette-primary-main) transparent ;
+  scrollbar-arrow-color: transparent;
+}
+body *::-webkit-scrollbar{
+  width: 5px;
+  border-radius: 25rem;
+}
+
+.fc-theme-standard{
+  height: 100%;
+}
+.calenderscreen{
+  height: 100% !important;
+}
+.MuiPaper-root{
+  position: relative;
+}
+.custom-loader{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.mui-cqc251{
+  position: static;
+}

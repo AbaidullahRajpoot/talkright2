@@ -1,14 +1,12 @@
 // Third-party Imports
 import { createSlice } from '@reduxjs/toolkit'
 
-// Data Imports
-import { events } from '@/fake-db/apps/calendar'
-
 const initialState = {
-  events: events,
-  filteredEvents: events,
+  events: [],
+  filteredEvents: [],
   selectedEvent: null,
-  selectedCalendars: ['Person 1', 'Person 2', 'Person 3', 'Person 4', 'Person 5']
+  selectedCalendars: [],
+  selectedAllCalendars: [],
 }
 
 const filterEventsUsingCheckbox = (events, selectedCalendars) => {
@@ -19,6 +17,15 @@ export const calendarSlice = createSlice({
   name: 'calendar',
   initialState: initialState,
   reducers: {
+
+    updateData: (state, action) => {
+      state.events = action.payload.events;
+      state.filteredEvents = action.payload.filteredEvents;
+      state.selectedEvent = null;
+      state.selectedCalendars = action.payload.selectedCalendars;
+      state.selectedAllCalendars = action.payload.selectedCalendars;
+    },
+
     filterEvents: state => {
       state.filteredEvents = state.events
     },
@@ -64,12 +71,20 @@ export const calendarSlice = createSlice({
       state.events = filterEventsUsingCheckbox(state.filteredEvents, state.selectedCalendars)
     },
     filterAllCalendarLabels: (state, action) => {
-      state.selectedCalendars = action.payload ? ['Person 1', 'Person 2', 'Person 3', 'Person 4', 'Person 5'] : []
-      state.events = filterEventsUsingCheckbox(state.filteredEvents, state.selectedCalendars)
+      if (action.payload == true) {
+        state.selectedCalendars = []
+        state.events = filterEventsUsingCheckbox(state.filteredEvents, state.selectedCalendars)
+      }
+      else {
+        state.selectedCalendars = state.selectedAllCalendars
+        state.events = filterEventsUsingCheckbox(state.filteredEvents, state.selectedCalendars)
+      }
+
     }
   }
 })
 export const {
+  updateData,
   filterEvents,
   addEvent,
   updateEvent,
