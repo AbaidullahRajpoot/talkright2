@@ -70,7 +70,7 @@ const DebouncedInput = ({ value: initialValue, onChange, debounce = 500, ...prop
 // Column Definitions
 const columnHelper = createColumnHelper()
 
-const ProjectTables = ({ projectTable,callType }) => {
+const ProjectTables = ({ projectTable, callType }) => {
   // States
   const [rowSelection, setRowSelection] = useState({})
 
@@ -80,28 +80,6 @@ const ProjectTables = ({ projectTable,callType }) => {
   // Hooks
   const columns = useMemo(
     () => [
-      {
-        id: 'select',
-        header: ({ table }) => (
-          <Checkbox
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              indeterminate: table.getIsSomeRowsSelected(),
-              onChange: table.getToggleAllRowsSelectedHandler()
-            }}
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            {...{
-              checked: row.getIsSelected(),
-              disabled: !row.getCanSelect(),
-              indeterminate: row.getIsSomeSelected(),
-              onChange: row.getToggleSelectedHandler()
-            }}
-          />
-        )
-      },
       columnHelper.accessor('name', {
         header: 'Who Called',
         cell: ({ row }) => (
@@ -139,25 +117,25 @@ const ProjectTables = ({ projectTable,callType }) => {
         header: 'Full Call',
         cell: ({ row }) =>
           <>
-           <i style={{ color: '#364e35' }} className='tabler-player-play'/>
-           <i  style={{ color: '#6a6a6a' }} className='tabler-download'/>
+            <i style={{ color: '#364e35' }} className='tabler-player-play' />
+            <i style={{ color: '#6a6a6a' }} className='tabler-download' />
           </>
       }),
       columnHelper.accessor('notification', {
         header: 'Contact',
-        cell: ({ row }) => 
-        <>
-          <i  style={{ color: '#5bab58' }} className='tabler-brand-whatsapp'/>
-          <img
-          className='mx-1'
-          src="/images/icons/gmail.png"
-          alt="Description of the image" 
-          style={{height:24,width:"30%",objectFit: "contain"}}
-          />
-          <i style={{ color: '#aeb9cc' }} className='tabler-message'/>
-        </>
+        cell: ({ row }) =>
+          <>
+            <i style={{ color: '#5bab58' }} className='tabler-brand-whatsapp' />
+            <img
+              className='mx-1'
+              src="/images/icons/gmail.png"
+              alt="Description of the image"
+              style={{ height: 24, width: "30%", objectFit: "contain" }}
+            />
+            <i style={{ color: '#aeb9cc' }} className='tabler-message' />
+          </>
       }),
-     
+
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -196,7 +174,7 @@ const ProjectTables = ({ projectTable,callType }) => {
     <Card>
       <CardHeader
         className='flex-wrap gap-x-4 gap-y-2'
-        title= {callType=="all"?'All Calls':'Calls Today' }
+        title={callType == "all" ? 'All Calls' : 'Calls Today'}
         action={
           <DebouncedInput
             value={globalFilter ?? ''}

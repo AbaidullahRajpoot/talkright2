@@ -99,10 +99,10 @@ const AddAgentForm = () => {
     resolver: valibotResolver(accountSchema),
     defaultValues: {
       name: '',
-      phone: '',
+      phone: '+971',
       language: '',
       voice: '',
-      message:''
+      message: ''
     }
   })
 
@@ -147,8 +147,8 @@ const AddAgentForm = () => {
 
   const handleReset = () => {
     setActiveStep(0)
-    accountReset({name: '', phone: '', language: '', voice: '',message:'' })
-    personalReset({ agentType: '',tone: '',instruction: '', })
+    accountReset({ name: '', phone: '', language: '', voice: '', message: '' })
+    personalReset({ agentType: '', tone: '', instruction: '', })
     socialReset({ Embedcode: '', Webhookendpoint: '' })
   }
 
@@ -182,19 +182,33 @@ const AddAgentForm = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Controller
-                  name='phone'
+                  name="phone"
                   control={accountControl}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <CustomTextField
                       {...field}
                       fullWidth
-                      label='Phone'
-                      placeholder='+91'
+                      label="Phone"
+                      placeholder="+971"
+                      type="tel"
+                      onChange={(e) => {
+                        let value = e.target.value;
+
+                        if (value.startsWith("+971")) {
+                          value = value.replace(/[^0-9+\-() ]/g, "");
+                        } else {
+                          value = "+971";
+                        }
+
+                        field.onChange(value);
+                      }}
                       {...(accountErrors.phone && { error: true, helperText: accountErrors.phone.message })}
                     />
                   )}
                 />
+
+
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Controller
@@ -209,41 +223,41 @@ const AddAgentForm = () => {
                       {...field}
                       error={Boolean(accountControl.language)}
                     >
-                    <MenuItem value="English">English</MenuItem>
-                    <MenuItem value="English(United States)">English (United States)</MenuItem>
-                    <MenuItem value="Bulgarian">Bulgarian</MenuItem>
-                    <MenuItem value="Catalan">Catalan</MenuItem>
-                    <MenuItem value="Czech">Czech</MenuItem>
-                    <MenuItem value="Danish">Danish</MenuItem>
-                    <MenuItem value="Dutch">Dutch</MenuItem>
-                    <MenuItem value="Estonian">Estonian</MenuItem>
-                    <MenuItem value="Finnish">Finnish</MenuItem>
-                    <MenuItem value="Flemish">Flemish</MenuItem>
-                    <MenuItem value="French">French</MenuItem>
-                    <MenuItem value="German">German</MenuItem>
-                    <MenuItem value="German(Switzerland)">German (Switzerland)</MenuItem>
-                    <MenuItem value="Greek">Greek</MenuItem>
-                    <MenuItem value="Hindi">Hindi</MenuItem>
-                    <MenuItem value="Hungarian">Hungarian</MenuItem>
-                    <MenuItem value="Indonesian">Indonesian</MenuItem>
-                    <MenuItem value="Italian">Italian</MenuItem>
-                    <MenuItem value="Japanese">Japanese</MenuItem>
-                    <MenuItem value="Korean">Korean</MenuItem>
-                    <MenuItem value="Latvian">Latvian</MenuItem>
-                    <MenuItem value="Lithuanian">Lithuanian</MenuItem>
-                    <MenuItem value="Malay">Malay</MenuItem>
-                    <MenuItem value="Norwegian">Norwegian</MenuItem>
-                    <MenuItem value="Polish">Polish</MenuItem>
-                    <MenuItem value="Portuguese">Portuguese</MenuItem>
-                    <MenuItem value="Romanian">Romanian</MenuItem>
-                    <MenuItem value="Russian">Russian</MenuItem>
-                    <MenuItem value="Slovak">Slovak</MenuItem>
-                    <MenuItem value="Spanish">Spanish</MenuItem>
-                    <MenuItem value="Swedish">Swedish</MenuItem>
-                    <MenuItem value="Thai">Thai</MenuItem>
-                    <MenuItem value="Turkish">Turkish</MenuItem>
-                    <MenuItem value="Ukrainian">Ukrainian</MenuItem>
-                    <MenuItem value="Vietnamese">Vietnamese</MenuItem>
+                      <MenuItem value="English">English</MenuItem>
+                      <MenuItem value="English(United States)">English (United States)</MenuItem>
+                      <MenuItem value="Bulgarian">Bulgarian</MenuItem>
+                      <MenuItem value="Catalan">Catalan</MenuItem>
+                      <MenuItem value="Czech">Czech</MenuItem>
+                      <MenuItem value="Danish">Danish</MenuItem>
+                      <MenuItem value="Dutch">Dutch</MenuItem>
+                      <MenuItem value="Estonian">Estonian</MenuItem>
+                      <MenuItem value="Finnish">Finnish</MenuItem>
+                      <MenuItem value="Flemish">Flemish</MenuItem>
+                      <MenuItem value="French">French</MenuItem>
+                      <MenuItem value="German">German</MenuItem>
+                      <MenuItem value="German(Switzerland)">German (Switzerland)</MenuItem>
+                      <MenuItem value="Greek">Greek</MenuItem>
+                      <MenuItem value="Hindi">Hindi</MenuItem>
+                      <MenuItem value="Hungarian">Hungarian</MenuItem>
+                      <MenuItem value="Indonesian">Indonesian</MenuItem>
+                      <MenuItem value="Italian">Italian</MenuItem>
+                      <MenuItem value="Japanese">Japanese</MenuItem>
+                      <MenuItem value="Korean">Korean</MenuItem>
+                      <MenuItem value="Latvian">Latvian</MenuItem>
+                      <MenuItem value="Lithuanian">Lithuanian</MenuItem>
+                      <MenuItem value="Malay">Malay</MenuItem>
+                      <MenuItem value="Norwegian">Norwegian</MenuItem>
+                      <MenuItem value="Polish">Polish</MenuItem>
+                      <MenuItem value="Portuguese">Portuguese</MenuItem>
+                      <MenuItem value="Romanian">Romanian</MenuItem>
+                      <MenuItem value="Russian">Russian</MenuItem>
+                      <MenuItem value="Slovak">Slovak</MenuItem>
+                      <MenuItem value="Spanish">Spanish</MenuItem>
+                      <MenuItem value="Swedish">Swedish</MenuItem>
+                      <MenuItem value="Thai">Thai</MenuItem>
+                      <MenuItem value="Turkish">Turkish</MenuItem>
+                      <MenuItem value="Ukrainian">Ukrainian</MenuItem>
+                      <MenuItem value="Vietnamese">Vietnamese</MenuItem>
                     </CustomTextField>
                   )}
                 />
@@ -274,7 +288,7 @@ const AddAgentForm = () => {
                 {accountErrors.voice && <FormHelperText error>voice is a required field</FormHelperText>}
               </Grid>
               <Grid item xs={12}>
-              <Controller
+                <Controller
                   name='message'
                   control={accountControl}
                   rules={{ required: true }}
@@ -289,7 +303,7 @@ const AddAgentForm = () => {
                       {...(accountErrors.message && { error: true, helperText: accountErrors.message.message })}
                     />
                   )}
-              />
+                />
               </Grid>
               <Grid item xs={12} className='flex justify-between'>
                 <Button
@@ -321,7 +335,7 @@ const AddAgentForm = () => {
                 </Typography>
                 <Typography variant='body2'>{steps[1].subtitle}</Typography>
               </Grid>
-              <Grid item xs={12} sm={6}>  
+              <Grid item xs={12} sm={6}>
                 <Controller
                   name='agentType'
                   control={personalControl}
@@ -364,7 +378,7 @@ const AddAgentForm = () => {
                 {personalErrors.tone && <FormHelperText error>This field is required</FormHelperText>}
               </Grid>
               <Grid item xs={12}>
-              <Controller
+                <Controller
                   name='instruction'
                   control={personalControl}
                   rules={{ required: true }}
@@ -379,7 +393,7 @@ const AddAgentForm = () => {
                       {...(personalErrors.instruction && { error: true, helperText: personalErrors.instruction.message })}
                     />
                   )}
-              />
+                />
               </Grid>
               <Grid item xs={12} className='flex justify-between'>
                 <Button
@@ -412,7 +426,7 @@ const AddAgentForm = () => {
                 <Typography variant='body2'>{steps[2].subtitle}</Typography>
               </Grid>
               <Grid item xs={12}>
-              <Controller
+                <Controller
                   name='Webhookendpoint'
                   control={socialControl}
                   rules={{ required: true }}
@@ -427,10 +441,10 @@ const AddAgentForm = () => {
                       {...(socialErrors.Webhookendpoint && { error: true, helperText: socialErrors.Webhookendpoint.message })}
                     />
                   )}
-              />
+                />
               </Grid>
               <Grid item xs={12}>
-              <Controller
+                <Controller
                   name='Embedcode'
                   control={socialControl}
                   rules={{ required: true }}
@@ -445,7 +459,7 @@ const AddAgentForm = () => {
                       {...(socialErrors.Embedcode && { error: true, helperText: socialErrors.Embedcode.message })}
                     />
                   )}
-              />
+                />
               </Grid>
               <Grid item xs={12} className='flex justify-between'>
                 <Button

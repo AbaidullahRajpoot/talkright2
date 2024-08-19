@@ -102,7 +102,7 @@ const Login = ({ mode }) => {
   } = useForm({
     resolver: valibotResolver(schema),
     defaultValues: {
-      email: 'admin@vuexy.com',
+      email: 'admin@talkright.com',
       password: 'admin'
     }
   })
@@ -123,7 +123,7 @@ const Login = ({ mode }) => {
       password: data.password,
       redirect: false
     })
-    
+
 
     if (res && res.ok && res.error === null) {
       // Vars
@@ -163,14 +163,14 @@ const Login = ({ mode }) => {
           </div>
           <Alert icon={false} className='bg-[var(--mui-palette-primary-lightOpacity)]'>
             <Typography variant='body2' color='primary'>
-              Email: <span className='font-medium'>admin@vuexy.com</span> / Pass:{' '}
+              Email: <span className='font-medium'>admin@talkright.com</span> / Pass:{' '}
               <span className='font-medium'>admin</span>
             </Typography>
           </Alert>
           <form
             noValidate
             autoComplete='off'
-            action={() => {}}
+            action={() => { }}
             onSubmit={handleSubmit(onSubmit)}
             className='flex flex-col gap-6'
           >

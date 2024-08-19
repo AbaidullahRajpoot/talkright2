@@ -106,12 +106,12 @@ const series = [
   {
     name: 'Total Calls',
     type: 'column',
-    data: [38, 45, 33, 38, 32, 48, 45, 40, 42, 37]
+    data: [38, 45, 33, 38, 32, 48, 45, 40, 42, 37, 23, 28, 23, 32, 25, 42, 32, 32, 26, 24, 23, 28, 23, 32, 25, 42, 32, 32, 26, 24, 24]
   },
   {
     name: 'Receive Calls',
     type: 'line',
-    data: [23, 28, 23, 32, 25, 42, 32, 32, 26, 24]
+    data: [23, 28, 23, 32, 25, 42, 32, 32, 26, 24, 23, 28, 23, 32, 25, 42, 32, 32, 26, 24, 23, 28, 23, 32, 25, 42, 32, 32, 26, 24, 24]
   }
 ]
 
@@ -187,7 +187,7 @@ const LogisticsShipmentStatistics = () => {
     },
     xaxis: {
       tickAmount: 10,
-      categories: ['1 Jan', '2 Jan', '3 Jan', '4 Jan', '5 Jan', '6 Jan', '7 Jan', '8 Jan', '9 Jan', '10 Jan'],
+      categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
       labels: {
         style: {
           colors: 'var(--mui-palette-text-disabled)',
@@ -215,18 +215,20 @@ const LogisticsShipmentStatistics = () => {
   }
 
   return (
-    <Card>
-      <CardHeader title='Call Statistics' subheader='Total number of calls' action={<MonthButton />} />
-      <CardContent>
-        <AppReactApexCharts
-          id='shipment-statistics'
-          type='line'
-          height={310}
-          width='100%'
-          series={series}
-          options={options}
-        />
-      </CardContent>
+    <Card >
+      <div className='h-100'>
+        <CardHeader title='Call Statistics' subheader='Total number of calls' action={<MonthButton />} />
+        <CardContent>
+          <AppReactApexCharts
+            id='shipment-statistics'
+            type='line'
+            height={310}
+            width='100%'
+            series={series}
+            options={options}
+          />
+        </CardContent>
+      </div>
     </Card>
   )
 }

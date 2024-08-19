@@ -25,7 +25,7 @@ const SidebarLeft = props => {
     calendarApi,
     dispatch,
     handleLeftSidebarToggle,
-    handleChangeDate
+    handleAddEventSidebarToggle
   } = props
 
   // Vars
@@ -49,6 +49,11 @@ const SidebarLeft = props => {
       )
     })
     : null
+
+  const handleSidebarToggleSidebar = () => {
+    dispatch(selectedEvent(null))
+    handleAddEventSidebarToggle()
+  }
 
   if (renderFilters) {
     return (
@@ -80,17 +85,25 @@ const SidebarLeft = props => {
           }
         }}
       >
+        <div className='is-full p-6'>
+          <Button
+            fullWidth
+            variant='contained'
+            onClick={handleSidebarToggleSidebar}
+            startIcon={<i className='tabler-plus' />}
+          >
+            Add Event
+          </Button>
+        </div>
         <Divider className='is-full' />
-
         <AppReactDatepicker
           inline
-          onChange={(data) => { handleChangeDate(data) }}
+          onChange={date => calendarApi.gotoDate(date)}
           boxProps={{
             className: 'flex justify-center is-full',
             sx: { '& .react-datepicker': { boxShadow: 'none !important', border: 'none !important' } }
           }}
         />
-
         <Divider className='is-full' />
 
         <div className='flex flex-col p-6 is-full'>
@@ -112,7 +125,6 @@ const SidebarLeft = props => {
                     dispatch(filterAllCalendarLabels(false))
                   }
                 }
-
                 }
               />
             }

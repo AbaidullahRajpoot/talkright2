@@ -1,6 +1,8 @@
 'use client'
 
 // Next Imports
+import { useState, useEffect } from 'react'
+
 import dynamic from 'next/dynamic'
 
 // MUI Imports
@@ -14,16 +16,13 @@ import { useTheme } from '@mui/material/styles'
 // Third-party Imports
 import classnames from 'classnames'
 
-// Components Imports
-import OptionMenu from '@core/components/option-menu'
-
 // Styled Component Imports
 const AppReactApexCharts = dynamic(() => import('@/libs/styles/AppReactApexCharts'))
 
 // Vars
 const series = [
   {
-    data: [35, 20, 16,  14, 10, 9]
+    data: [35, 20, 16, 14, 10, 9]
   }
 ]
 
@@ -41,9 +40,14 @@ const data2 = [
 
 const labels = ['Cardiovascular', 'Internal Medicine', 'Orthopaedics', 'Neurology', 'Oncology', 'Urology']
 
+
 const InterestedTopics = () => {
   // Hooks
   const theme = useTheme()
+  const [fontSize, updateFontSize] = useState("16px")
+
+
+
 
   // Vars
   const options = {
@@ -86,11 +90,11 @@ const InterestedTopics = () => {
     },
     dataLabels: {
       enabled: true,
-      offsetY: 8,
+      offsetY: 0,
       style: {
         colors: ['#fff'],
         fontWeight: 500,
-        fontSize: '0.8125rem'
+        fontSize: "clamp(10px, 1vw, 16px)"
       },
       formatter(val, opt) {
         return labels[opt.dataPointIndex]
@@ -138,6 +142,11 @@ const InterestedTopics = () => {
       }
     }
   }
+
+  useEffect(() => {
+    window.matchMedia("(max-width: 700px)") ? updateFontSize("10px") : null
+
+  }, [])
 
   return (
     <Card>

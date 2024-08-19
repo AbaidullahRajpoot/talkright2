@@ -81,6 +81,7 @@ const AddEventSidebar = props => {
       setValues({
         url: event.url || '',
         title: event.title || '',
+        creator: event.extendedProps.creator || '',
         allDay: event.allDay,
         guests: event.extendedProps.guests || [],
         description: event.extendedProps.description || '',
@@ -188,21 +189,18 @@ const AddEventSidebar = props => {
 
   return (
     <Drawer
-      anchor='right'
+      anchor='left'
       open={addEventSidebarOpen}
       onClose={handleSidebarClose}
       ModalProps={{ keepMounted: true }}
-      sx={{ '& .MuiDrawer-paper': { width: ['100%', 400] } }}
+      sx={{ '& .MuiDrawer-paper': { width: ['100%', 500] } }}
     >
       <Box className='flex justify-between items-center sidebar-header plb-5 pli-6 border-be'>
         <Typography variant='h5'>
-          {calendarStore.selectedEvent && calendarStore.selectedEvent.title.length ? 'Update Event' : 'Add Event'}
+          Event Details
         </Typography>
         {calendarStore.selectedEvent && calendarStore.selectedEvent.title.length ? (
           <Box className='flex items-center' sx={{ gap: calendarStore.selectedEvent !== null ? 1 : 0 }}>
-            <IconButton size='small' onClick={handleDeleteButtonClick}>
-              <i className='tabler-trash text-2xl text-textPrimary' />
-            </IconButton>
             <IconButton size='small' onClick={handleSidebarClose}>
               <i className='tabler-x text-2xl text-textPrimary' />
             </IconButton>
@@ -222,10 +220,12 @@ const AddEventSidebar = props => {
           <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' className='flex flex-col gap-6'>
             <Controller
               name='title'
+
               control={control}
               rules={{ required: true }}
               render={({ field: { value, onChange } }) => (
                 <CustomTextField
+                  disabled
                   fullWidth
                   label='Title'
                   value={value}
@@ -235,20 +235,16 @@ const AddEventSidebar = props => {
               )}
             />
             <CustomTextField
-              select
+              disabled
               fullWidth
-              label='Calendar'
-              value={values.calendar}
-              onChange={e => setValues({ ...values, calendar: e.target.value })}
-            >
-              <MenuItem value='Person 1'>Person 1</MenuItem>
-              <MenuItem value='Person 2'>Person 2</MenuItem>
-              <MenuItem value='Person 3'>Person 3</MenuItem>
-              <MenuItem value='Person 4'>Person 4</MenuItem>
-              <MenuItem value='Person 5'>Person 5</MenuItem>
-            </CustomTextField>
-
+              type='url'
+              id='event-url'
+              label='Event Creator'
+              value={values.creator}
+              onChange={e => setValues({ ...values, url: e.target.value })}
+            />
             <AppReactDatepicker
+              disabled
               selectsStart
               id='event-start-date'
               endDate={values.endDate}
@@ -261,6 +257,7 @@ const AddEventSidebar = props => {
               onSelect={handleStartDate}
             />
             <AppReactDatepicker
+              disabled
               selectsEnd
               id='event-end-date'
               endDate={values.endDate}
@@ -272,15 +269,8 @@ const AddEventSidebar = props => {
               customInput={<PickersComponent label='End Date' registername='endDate' />}
               onChange={date => date !== null && setValues({ ...values, endDate: new Date(date) })}
             />
-            <FormControl>
-              <FormControlLabel
-                label='All Day'
-                control={
-                  <Switch checked={values.allDay} onChange={e => setValues({ ...values, allDay: e.target.checked })} />
-                }
-              />
-            </FormControl>
             <CustomTextField
+              disabled
               fullWidth
               type='url'
               id='event-url'
@@ -289,30 +279,7 @@ const AddEventSidebar = props => {
               onChange={e => setValues({ ...values, url: e.target.value })}
             />
             <CustomTextField
-              fullWidth
-              select
-              label='Guests'
-              value={values.guests}
-              id='event-guests-select'
-              // eslint-disable-next-line lines-around-comment
-              // @ts-ignore
-              onChange={e => {
-                setValues({
-                  ...values,
-                  guests: typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value
-                })
-              }}
-              SelectProps={{
-                multiple: true
-              }}
-            >
-              <MenuItem value='bruce'>Bruce</MenuItem>
-              <MenuItem value='clark'>Clark</MenuItem>
-              <MenuItem value='diana'>Diana</MenuItem>
-              <MenuItem value='john'>John</MenuItem>
-              <MenuItem value='barry'>Barry</MenuItem>
-            </CustomTextField>
-            <CustomTextField
+              disabled
               rows={4}
               multiline
               fullWidth
@@ -321,9 +288,7 @@ const AddEventSidebar = props => {
               value={values.description}
               onChange={e => setValues({ ...values, description: e.target.value })}
             />
-            <div className='flex items-center'>
-              <RenderSidebarFooter />
-            </div>
+
           </form>
         </Box>
       </ScrollWrapper>

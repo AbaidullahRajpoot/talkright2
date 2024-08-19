@@ -14,6 +14,8 @@ import moment from 'moment-timezone'
 
 import Calendar from './Calendar'
 import SidebarLeft from './SidebarLeft'
+import AddEventSidebar from './AddEventSidebar'
+
 import { updateData } from '@/redux-store/slices/calendar'
 import ProgressCircularCustomization from '@components/loader'
 
@@ -52,6 +54,8 @@ const AppCalendar = () => {
         id: event.id,
         url: event.htmlLink,
         title: event.organizer.displayName,
+        description: event?.description,
+        creator: event?.creator?.email,
         start: StartdateInDubai,
         end: EnddateInDubai,
         allDay: false,
@@ -122,8 +126,6 @@ const AppCalendar = () => {
     const endTime = date.split('T')[0] + 'T23:59:59+04:00';
 
     const rs = await getChangeDateData(startTime, endTime)
-
-    console.log(rs)
 
     if (rs.length >= 0) {
       const convertedEvents = await convertCalendarEvents(rs);
@@ -261,10 +263,6 @@ const AppCalendar = () => {
         endTime
       };
 
-      console.log(requestBody)
-      console.log(process.env.NEXT_PUBLIC_API_URL)
-      console.log(`${process.env.NEXT_PUBLIC_API_URL}/apps/calender`)
-
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/apps/calender`, {
         method: 'POST',
         headers: {
@@ -310,7 +308,6 @@ const AppCalendar = () => {
           handleChangeDate={handleChangeDate}
         />
         <div className='p-6 pbe-0 flex-grow overflow-visible bg-backgroundPaper rounded'>
-          {loading == true && <ProgressCircularCustomization />}
           <Calendar
             dispatch={dispatch}
             calendarApi={calendarApi}
@@ -321,6 +318,13 @@ const AppCalendar = () => {
             handleAddEventSidebarToggle={handleAddEventSidebarToggle}
           />
         </div>
+        <AddEventSidebar
+          dispatch={dispatch}
+          calendarApi={calendarApi}
+          calendarStore={calendarStore}
+          addEventSidebarOpen={addEventSidebarOpen}
+          handleAddEventSidebarToggle={handleAddEventSidebarToggle}
+        />
       </>
       :
       <ProgressCircularCustomization />

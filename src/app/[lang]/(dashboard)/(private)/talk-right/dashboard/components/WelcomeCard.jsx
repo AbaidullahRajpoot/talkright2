@@ -72,7 +72,7 @@ const WelcomeCard = () => {
     legend: { show: false },
     tooltip: { theme: 'false' },
     dataLabels: { enabled: false },
-    labels: ['36h', '56h', '16h', '32h', '56h', '16h'],
+    labels: ['used 36h', 'rem 56h'],
     states: {
       hover: {
         filter: { type: 'none' }
@@ -113,19 +113,19 @@ const WelcomeCard = () => {
   }
 
   return (
-    <div className='flex max-md:flex-col md:items-center gap-6 plb-6'>
+    <div className='flex max-md:flex-col md:items-center gap-6'>
       <div className='md:is-8/12'>
         <div className='flex items-baseline gap-1 mbe-2'>
           <Typography variant='h4'>Hi, John</Typography>
         </div>
-        <div className='mbe-4'>
+        <div className='mbe-4 mt-4'>
           <Typography>Your progress this week is Awesome. let&apos;s keep it up</Typography>
         </div>
         <div className='flex flex-wrap max-md:flex-col justify-between gap-6'>
           {data.map((item, i) => (
             <div key={i} className='flex gap-4'>
               <CustomAvatar variant='rounded' skin='light' size={54} color={item.color}>
-                 <i className={item.icon}  />
+                <i className={item.icon} />
               </CustomAvatar>
               <div>
                 <Typography className='font-medium'>{item.title}</Typography>
@@ -141,7 +141,7 @@ const WelcomeCard = () => {
       <div className='flex justify-between md:is-4/12'>
         <div className='flex flex-col justify-between gap-6'>
           <div>
-            <Typography variant='h5' className='mbe-1'>
+            <Typography variant='h6' className='mbe-1 '>
               Remaining Minutes
             </Typography>
             <Typography>Weekly report</Typography>
@@ -151,9 +151,9 @@ const WelcomeCard = () => {
               231<span className='text-textSecondary'>h</span> 14<span className='text-textSecondary'>m</span>
             </Typography>
             <Link href={`/${locale}/talk-right/add-mints`} passHref>
-            <Button variant='contained'>
+              <Button className='remaining-btn' variant='contained'>
                 Add More Minutes
-            </Button>
+              </Button>
             </Link>
           </div>
         </div>

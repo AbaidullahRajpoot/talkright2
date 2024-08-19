@@ -14,7 +14,6 @@ import { useTheme } from '@mui/material/styles'
 import classnames from 'classnames'
 
 // Components Imports
-import OptionMenu from '@core/components/option-menu'
 import CustomAvatar from '@core/components/mui/Avatar'
 
 // Styled Component Imports
