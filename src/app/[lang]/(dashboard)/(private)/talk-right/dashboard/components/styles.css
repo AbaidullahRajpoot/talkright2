@@ -16,4 +16,10 @@
     padding: 5px 10px;
   }
 }
+@media only screen and (max-width: 1280px) {
+  .responsive-text{
+    font-size: 11px;
+    padding: 0px !important;
+  }
+}
 

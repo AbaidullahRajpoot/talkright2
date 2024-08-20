@@ -22,20 +22,20 @@ const CardVerticalRatings = () => {
             Rating Breakdown
           </Typography>
           <div className='flex flex-wrap gap-x-2 gap-y-1 mbe-2 justify-between'>
-            <Typography>Call experience Rated</Typography>
-            <Typography>★4.7</Typography>
+            <Typography className='responsive-text'>Call experience Rated</Typography>
+            <Typography className='responsive-text'>★4.7</Typography>
           </div>
           <div className='flex flex-wrap gap-x-2 gap-y-1 mbe-2 justify-between'>
-            <Typography>Customer Satisfaction Rating</Typography>
-            <Typography>★3.2</Typography>
+            <Typography className='responsive-text'>Customer Satisfaction Rating</Typography>
+            <Typography className='responsive-text'>★3.2</Typography>
           </div>
           <div className='flex flex-wrap gap-x-2 gap-y-1 mbe-2 justify-between'>
-            <Typography>Call Quality Feedback</Typography>
-            <Typography>★4.2</Typography>
+            <Typography className='responsive-text'>Call Quality Feedback</Typography>
+            <Typography className='responsive-text'>★4.2</Typography>
           </div>
           <div className='flex flex-wrap gap-x-2 gap-y-1 mbe-2 justify-between'>
-            <Typography>Overall Call Satisfaction</Typography>
-            <Typography>★3.9</Typography>
+            <Typography className='responsive-text'>Overall Call Satisfaction</Typography>
+            <Typography className='responsive-text'>★3.9</Typography>
           </div>
         </div>
 

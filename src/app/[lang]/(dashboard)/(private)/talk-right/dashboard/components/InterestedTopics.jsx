@@ -143,11 +143,6 @@ const InterestedTopics = () => {
     }
   }
 
-  useEffect(() => {
-    window.matchMedia("(max-width: 700px)") ? updateFontSize("10px") : null
-
-  }, [])
-
   return (
     <Card>
       <CardHeader
@@ -165,8 +160,8 @@ const InterestedTopics = () => {
                   <div key={i} className='flex gap-2'>
                     <i className={classnames('tabler-circle-filled text-xs m-[5px]', item.colorClass)} />
                     <div>
-                      <Typography>{item.title}</Typography>
-                      <Typography variant='h5'>{`${item.value}%`}</Typography>
+                      <Typography className='responsive-text'>{item.title}</Typography>
+                      <Typography className='responsive-text' variant='h5'>{`${item.value}%`}</Typography>
                     </div>
                   </div>
                 ))}
@@ -176,8 +171,8 @@ const InterestedTopics = () => {
                   <div key={i} className='flex gap-2'>
                     <i className={classnames('tabler-circle-filled text-xs m-[5px]', item.colorClass)} />
                     <div>
-                      <Typography>{item.title}</Typography>
-                      <Typography variant='h5'>{`${item.value}%`}</Typography>
+                      <Typography className='responsive-text'>{item.title}</Typography>
+                      <Typography className='responsive-text' variant='h5'>{`${item.value}%`}</Typography>
                     </div>
                   </div>
                 ))}
