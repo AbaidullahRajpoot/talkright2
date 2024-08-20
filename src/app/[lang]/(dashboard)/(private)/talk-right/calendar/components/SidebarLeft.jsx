@@ -85,7 +85,7 @@ const SidebarLeft = props => {
           }
         }}
       >
-        <div className='is-full p-6'>
+        {/* <div className='is-full p-6'>
           <Button
             fullWidth
             variant='contained'
@@ -94,7 +94,7 @@ const SidebarLeft = props => {
           >
             Add Event
           </Button>
-        </div>
+        </div> */}
         <Divider className='is-full' />
         <AppReactDatepicker
           inline

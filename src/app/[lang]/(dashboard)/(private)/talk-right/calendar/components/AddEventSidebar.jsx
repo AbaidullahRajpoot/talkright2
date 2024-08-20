@@ -189,7 +189,7 @@ const AddEventSidebar = props => {
 
   return (
     <Drawer
-      anchor='left'
+      anchor='right'
       open={addEventSidebarOpen}
       onClose={handleSidebarClose}
       ModalProps={{ keepMounted: true }}

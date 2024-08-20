@@ -113,7 +113,7 @@ const AgentTableList = ({ productData }) => {
           />
         )
       },
-      
+
       columnHelper.accessor('name', {
         header: 'Name',
         cell: ({ row }) => <Typography>{row.original.name}</Typography>
@@ -140,11 +140,11 @@ const AgentTableList = ({ productData }) => {
           <div className='flex items-center'>
             <Link href={`/${locale}/talk-right/agent/edit`} passHref>
               <IconButton>
-                <i className='tabler-edit text-textSecondary' />
+                <i className='tabler-edit' />
               </IconButton>
             </Link>
             <IconButton>
-              <i className='tabler-trash text-textSecondary' />
+              <i className='tabler-trash' />
             </IconButton>
           </div>
         ),

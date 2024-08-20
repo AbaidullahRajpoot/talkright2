@@ -150,8 +150,6 @@ body *::-webkit-scrollbar{
 }
 .calenderscreen{
   height: 100% !important;
-}
-.MuiPaper-root{
   position: relative;
 }
 .custom-loader{
@@ -162,4 +160,23 @@ body *::-webkit-scrollbar{
 }
 .mui-cqc251{
   position: static;
+}
+
+.tabler-menu-2 {
+  color: #aeb9cc;
+}
+.tabler-language  {
+  color: #aeb9cc;
+}
+.tabler-bell  {
+  color: #aeb9cc;
+}
+.tabler-edit {
+  color: #aeb9cc;
+}
+.tabler-trash {
+  color: #aeb9cc;
+}
+.tabler-chevron-down {
+  color: #aeb9cc;
 }
